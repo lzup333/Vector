@@ -38,12 +38,14 @@ import org.matrix.vector.manager.ui.navigation.StoreDetail
 import org.matrix.vector.manager.ui.navigation.CrashTrace
 import org.matrix.vector.manager.ui.navigation.LogTrace
 import org.matrix.vector.manager.ui.navigation.SystemStatus
+import org.matrix.vector.manager.ui.navigation.InvalidateArtInlineHooks
 import org.matrix.vector.manager.ui.navigation.Web
 import org.matrix.vector.manager.ui.navigation.TopLevelRoute
 import org.matrix.vector.manager.ui.navigation.rememberNavigator
 import org.matrix.vector.manager.ui.screens.home.HomeScreen
 import org.matrix.vector.manager.ui.screens.home.CrashTraceScreen
 import org.matrix.vector.manager.ui.screens.home.SystemStatusScreen
+import org.matrix.vector.manager.ui.screens.home.InvalidateArtInlineHooksScreen
 import org.matrix.vector.ui.logs.LogTraceScreen
 import org.matrix.vector.manager.data.repository.VectorLogSource
 import org.matrix.vector.manager.ui.theme.LocalizedOverlay
@@ -250,7 +252,11 @@ private fun EntryProviderScope<NavKey>.registerRoutes(navigator: Navigator) {
         SystemStatusScreen(
             onNavigateBack = { navigator.back() },
             onOpenCrash = { navigator.go(CrashTrace) },
+            onOpenArtInlineHooks = { navigator.go(InvalidateArtInlineHooks) },
         )
+    }
+    entry<InvalidateArtInlineHooks> {
+        InvalidateArtInlineHooksScreen(onNavigateBack = { navigator.back() })
     }
     entry<CrashTrace> { CrashTraceScreen(onNavigateBack = { navigator.back() }) }
     entry<LogTrace> { route ->

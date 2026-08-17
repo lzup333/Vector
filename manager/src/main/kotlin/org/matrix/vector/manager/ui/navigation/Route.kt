@@ -51,6 +51,13 @@ sealed interface TopLevelRoute : Route {
 @Serializable data object SystemStatus : Route
 
 /**
+ * The per-app ART inline hook compatibility picker.
+ *
+ * Read from the system status screen, next to the other framework behaviour toggles.
+ */
+@Serializable data object InvalidateArtInlineHooks : Route
+
+/**
  * The newest recorded crash, frame by frame.
  *
  * Carries no argument: there is only ever one crash worth opening — the newest — and the screen

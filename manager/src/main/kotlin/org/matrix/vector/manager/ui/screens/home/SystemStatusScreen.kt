@@ -90,6 +90,7 @@ import org.matrix.vector.manager.ui.theme.VectorMono
 fun SystemStatusScreen(
     onNavigateBack: () -> Unit,
     onOpenCrash: () -> Unit,
+    onOpenArtInlineHooks: () -> Unit,
     viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory),
 ) {
     val status by viewModel.status.collectAsStateWithLifecycle()
@@ -225,6 +226,17 @@ fun SystemStatusScreen(
                     checked = hiddenIcon,
                     enabled = daemonAlive,
                     onCheckedChange = viewModel::setForcedLauncherIcons,
+                )
+            }
+            // The per-app picker is a screen of its own rather than a switch, because there is no
+            // single on/off to model: it is a choice per package.
+            item {
+                FrameworkToggle(
+                    title = stringResource(R.string.invalidate_art_inline_hooks),
+                    subtitle = stringResource(R.string.invalidate_art_inline_hooks_summary),
+                    checked = false,
+                    enabled = daemonAlive,
+                    onCheckedChange = { if (it) onOpenArtInlineHooks() },
                 )
             }
 
